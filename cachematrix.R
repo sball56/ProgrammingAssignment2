@@ -1,16 +1,45 @@
-## Put comments here that give an overall description of what your
-## functions do
+## define two functions that create an object that hold a matrix and its inverse
+## but only calculates the inverse when the matrix changes
 
-## Write a short comment describing this function
+## create an object that holds a matix and its inverse and provides methods to 
+## to get and set them.
 
-makeCacheMatrix <- function(x = matrix()) {
+makeCacheMatrix <- function(theMatrix = matrix()) {
+    ## initialise the inverse
+    theInverse <- NULL
+    ## the matrix setter function
+    set <- function(aMatrix) {
+        theMatrix <<- aMatrix
+        theInverse <<- NULL
+    }
+    ## the matrix getter function
+    get <- function() theMatrix
+    ## the inverse setter function
+    setinverse <- function(inverse) theInverse <<- inverse
+    ## the inverse getter function
+    getinverse <- function() theInverse
+    
+    list(set = set, get = get,
+         setinverse = setinverse,
+         getinverse = getinverse)
 
 }
 
 
-## Write a short comment describing this function
+## calculate the inverse only when the inverse is NULL
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+cacheSolve <- function(theMatrix, ...) {
+    ## Return a matrix that is the inverse of 'x'
+    inverse <- theMatrix$getinverse()
+    if(!is.null(inverse)) {
+        message("getting cached data")
+        return(inverse)
+    }
+    matrix <- theMatrix$get()
+    inverse <- solve(matrix, ...)
+    theMatrix$setinverse(inverse)
+    inverse
 }
-## test commit
+
+## some test data
+## xx <- matrix(c(2,5,6,4,3,7,8,9,3), nrow=3, ncol=3, byrow=TRUE)
