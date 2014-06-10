@@ -1,9 +1,9 @@
 ## define two functions that create an object that hold a matrix and its inverse
 ## but only calculates the inverse when the matrix changes
 
-## create an object that holds a matix and its inverse and provides methods to 
-## to get and set them.
-
+## makeCacheMatrix:
+##      create an object that holds a matix and its inverse and provides methods 
+##      to get and set them.
 makeCacheMatrix <- function(theMatrix = matrix()) {
     ## initialise the inverse
     theInverse <- NULL
@@ -25,9 +25,8 @@ makeCacheMatrix <- function(theMatrix = matrix()) {
 
 }
 
-
-## calculate the inverse only when the inverse is NULL
-
+## cacheSolve:
+##      calculate the inverse only when the inverse is NULL
 cacheSolve <- function(theMatrix, ...) {
     ## Return a matrix that is the inverse of 'x'
     inverse <- theMatrix$getinverse()
@@ -37,7 +36,7 @@ cacheSolve <- function(theMatrix, ...) {
     }
     matrix <- theMatrix$get()
     inverse <- solve(matrix, ...)
-    theMatrix$setinverse(inverse)
+    theMatrix$setinverse(inverse)  ## set the inverse 
     inverse
 }
 
